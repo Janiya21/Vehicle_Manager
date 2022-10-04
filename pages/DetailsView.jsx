@@ -48,6 +48,51 @@ export default function AddVehicle() {
                     </Box>
                 </Stack>
             </Box>
+            <Box flex={"1"} top="1/2">
+                <Stack w="90%" marginLeft="5">
+                    <Box alignItems="center">
+                        <Input placeholder="Username" w="80%" />
+                    </Box>
+                    <Box mt="5" alignItems="center">
+                        <Input placeholder="Password" w="80%" />
+                    </Box>
+                    <Box mt="3" alignItems="center">
+                        <Button mt="5" w="40%" success>
+                            <Text>Log In</Text>
+                        </Button>
+                    </Box>
+                </Stack>
+            </Box>
+            <Box flex={"1"} top="1/2">
+                <Stack w="90%" marginLeft="5">
+                    <Box alignItems="center">
+                        <Input placeholder="Username" w="80%" />
+                    </Box>
+                    <Box mt="5" alignItems="center">
+                        <Input placeholder="Password" w="80%" />
+                    </Box>
+                    <Box mt="3" alignItems="center">
+                        <Button mt="5" w="40%" success>
+                            <Text>Log In</Text>
+                        </Button>
+                    </Box>
+                </Stack>
+            </Box>
+            <Box flex={"1"} top="1/2">
+                <Stack w="90%" marginLeft="5">
+                    <Box alignItems="center">
+                        <Input placeholder="Username" w="80%" />
+                    </Box>
+                    <Box mt="5" alignItems="center">
+                        <Input placeholder="Password" w="80%" />
+                    </Box>
+                    <Box mt="3" alignItems="center">
+                        <Button mt="5" w="40%" success>
+                            <Text>Log In</Text>
+                        </Button>
+                    </Box>
+                </Stack>
+            </Box>
         </ScrollView>
     )
 }
