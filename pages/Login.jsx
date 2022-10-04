@@ -2,10 +2,10 @@ import { View, Text } from 'react-native'
 import React, { useState } from 'react'
 import { Stack, Box, Input, Center, Button, Heading, Pressable, ScrollView } from "native-base";
 import { EvilIcons } from '@expo/vector-icons';
+import axios from 'axios';
 
 export default function AddVehicle() {
 
-    const [image, setImage] = new useState('https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png');
     const [vehicleNumber, setVehicleNumber] = new useState('');
     const [vehicleType, setVehicleType] = new useState('');
     const [Venue, setVenue] = new useState('');
@@ -36,7 +36,7 @@ export default function AddVehicle() {
             <Box flex={"1"} top="1/2">
                 <Stack w="90%" marginLeft="5">
                     <Box alignItems="center">
-                        <Input placeholder="Username" w="80%" />
+                        <Input value={vehicleNumber} placeholder="Username" w="80%" />
                     </Box>
                     <Box mt="5" alignItems="center">
                         <Input placeholder="Password" w="80%" />
