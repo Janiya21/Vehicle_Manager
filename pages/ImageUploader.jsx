@@ -1,86 +1,79 @@
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
-import { Stack, Box, Input, Center, Button, Heading, ScrollView, FormControl } from "native-base";
-import { EvilIcons } from '@expo/vector-icons';
-import axios from 'axios';
+import { View, Platform, Image } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { NativeBaseProvider, Box, Input, Center, Button, AddIcon, ScrollView } from "native-base";
+import * as ImagePicker from 'expo-image-picker';
+import {Constants} from "expo-constants";
 
 export default function AddVehicle() {
+    const [photo, setPhoto] = useState(null);
 
-    const [email, setEmail] = new useState('');
-    const [password, setPassword] = new useState('');
-
-    const submitHandler = async (e) => {
-        console.log("fukker");
-
-        const obLog = {
-            "email": email,
-            "password": password
+    useEffect(async () => {
+        if(Platform.OS !== 'web'){
+            const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if(status !== 'granted'){
+                alert('Permission Denied');
+            }
         }
+    },[]);
 
-        console.log("fukker 2");
-
-        let res = await login(obLog);
-        console.log(res);
+    const pickImage = async () =>{
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing:true,
+            aspect:[4,3],
+            quality:1
+        })
+        console.log(result);
+        if(!result.cancelled){
+            setPhoto(result.uri)
+        }
     }
 
-    const login = async (data) => {
-        const promise = new Promise((resolve, reject) => {
-            axios.post('http://localhost:4000/api/login', data)
-                .then((res) => {
-                    alert(res.data.message);
-                    return resolve(res)
-                })
-                .catch((err) => {
-                    return resolve(err)
-                })
+    /*============*/
+
+    const createFormData = (photo, body = {}) => {
+        const data = new FormData();
+
+        data.append('photo', {
+            uri: Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", ""),
+            type: 'image/jpeg',
+            name: 'photo.jpeg'
         });
 
-        return await promise;
-    }
+        Object.keys(body).forEach((key) => {
+            data.append(key, body[key]);
+        });
+
+        return data;
+    };
+
+    const handleUploadPhoto = () => {
+        fetch(`http://localhost:4000/api/images/upload`, {
+            method: 'POST',
+            body: createFormData(photo, { userId: '123' }),
+            'Content-Type': 'multipart/form-data',
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                console.log('response', response);
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
+    };
 
     return (
-        <ScrollView flex={"1"} style={
-            {
-                backgroundColor: "#004466",
-            }
-        } >
-            <Box flex={"1"} top="20" >
-                <Center flex={"3"} w="100%" >
-                    <Box flex={"2"} w="100%" h="100%" >
-                        <Center>
-                            <EvilIcons name="user" size={120} color="white" />
-                        </Center>;
-                    </Box>
-                </Center>
-                <Center top="2">
-                    <Heading color="white">LOG-IN</Heading>
-                </Center>
-            </Box>
-
-
-            <Box flex={"1"} top="1/2">
-                <Stack w="90%" marginLeft="5">
-                    <Box alignItems="center">
-                        <Input
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            placeholder="Username" w="80%" />
-                    </Box>
-                    <Box mt="5" alignItems="center">
-                        <Input
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            placeholder="Password" w="80%" />
-                    </Box>
-                    <Box mt="3" alignItems="center">
-                        <Button
-                            mt="5" w="40%" success
-                            onPress={()=>submitHandler()}>
-                            <Text>Log In</Text>
-                        </Button>
-                    </Box>
-                </Stack>
-            </Box>
-        </ScrollView>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            {photo && (
+                <>
+                    <Image
+                        source={{ uri: photo.uri }}
+                        style={{ width: 300, height: 300 }}
+                    />
+                    <Button onPress={handleUploadPhoto}>Upload Photo</Button>
+                </>
+            )}
+            <Button onPress={pickImage} >Choose Photo</Button>
+        </View>
     )
 }

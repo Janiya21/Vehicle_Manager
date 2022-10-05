@@ -5,15 +5,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function AddVehicle() {
 
-    const [image, setImage] = new useState('https://cdn3.iconfinder.com/data/icons/eightyshades/512/14_Add-512.png');
-    const [vehicleNumber, setVehicleNumber] = new useState('');
-    const [vehicleType, setVehicleType] = new useState('');
-    const [Venue, setVenue] = new useState('');
-    const [price, setPrice] = new useState('');
-    const [mileage, setmileage] = new useState('');
-    const [show, setShow] = React.useState(false);
-
-
     return (
         <View style={
             {

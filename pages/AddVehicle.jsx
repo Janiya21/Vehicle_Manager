@@ -5,13 +5,6 @@ import { NativeBaseProvider, Box, Input, Center, Button, Image, AddIcon, ScrollV
 
 export default function AddVehicle() {
 
-    const [image, setImage] = new useState('https://icon-library.com/images/add-on-icon/add-on-icon-1.jpg');
-    const [vehicleNumber, setVehicleNumber] = new useState('');
-    const [vehicleType, setVehicleType] = new useState('');
-    const [Venue, setVenue] = new useState('');
-    const [price, setPrice] = new useState('');
-    const [mileage, setmileage] = new useState('');
-
     return (
         <ScrollView flex={"1"}  style={
             {

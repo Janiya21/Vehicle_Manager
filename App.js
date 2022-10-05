@@ -17,6 +17,7 @@ import { Platform } from "react-native";
 import AddVehicle from './pages/AddVehicle';
 import Login from './pages/Login';
 import DetailsView from './pages/DetailsView';
+import ImageUploader from "./pages/ImageUploader";
 
 // Define the config
 const config = {
@@ -29,7 +30,7 @@ export const theme = extendTheme({ config });
 export default function App() {
   return (
     <NativeBaseProvider>
-        <Login/>
+        <ImageUploader/>
     </NativeBaseProvider>
   );
 }
