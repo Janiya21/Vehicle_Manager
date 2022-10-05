@@ -4,23 +4,27 @@ import { Stack, Box, Input, Center, Button, Heading, ScrollView, FormControl } f
 import { EvilIcons } from '@expo/vector-icons';
 import axios from 'axios';
 
-export default function AddVehicle() {
+export default function AddVehicle(props) {
 
     const [email, setEmail] = new useState('');
     const [password, setPassword] = new useState('');
 
+    const navigate = (props) => {
+        props.navigation.navigate('AddVehicle');
+    }
+
     const submitHandler = async (e) => {
-        console.log("fukker");
 
         const obLog = {
             "email": email,
             "password": password
         }
 
-        console.log("fukker 2");
-
         let res = await login(obLog);
-        console.log(res);
+        console.log(res.data.valid);
+        if(res.data.valid === "OK"){
+            navigate(props)
+        }
     }
 
     const login = async (data) => {
@@ -58,7 +62,7 @@ export default function AddVehicle() {
             </Box>
 
 
-            <Box flex={"1"} top="1/2">
+            <Box flex={"1"} top="1/3">
                 <Stack w="90%" marginLeft="5">
                     <Box alignItems="center">
                         <Input
@@ -75,7 +79,7 @@ export default function AddVehicle() {
                     <Box mt="3" alignItems="center">
                         <Button
                             mt="5" w="40%" success
-                            onPress={()=>submitHandler()}>
+                            onPress={submitHandler}>
                             <Text>Log In</Text>
                         </Button>
                     </Box>

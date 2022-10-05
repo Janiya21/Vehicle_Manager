@@ -3,7 +3,11 @@ import React, { useState } from 'react'
 import { NativeBaseProvider, Box, Input, Center, Button, Image, AddIcon, ScrollView } from "native-base";
 
 
-export default function AddVehicle() {
+export default function AddVehicle(props) {
+
+    const navigate = (props) => {
+        props.navigation.navigate('ShowVehicle');
+    }
 
     return (
         <ScrollView flex={"1"}  style={
@@ -65,7 +69,7 @@ export default function AddVehicle() {
                         <Input variant="underlined" placeholder="Seller No" />
                     </Box>
                     <Box mt="3" w="80%">
-                        <Button onPress={() => console.log("hello world")}>Register Vehicle</Button>
+                        <Button onPress={() =>{navigate(props)}}>Register Vehicle</Button>
                     </Box>
                 </Center>
             </Box>

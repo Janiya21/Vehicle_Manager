@@ -1,12 +1,5 @@
 import React from "react";
 import {
-  Text,
-  Link,
-  HStack,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
   NativeBaseProvider,
   extendTheme,
   VStack,
@@ -18,6 +11,9 @@ import AddVehicle from './pages/AddVehicle';
 import Login from './pages/Login';
 import DetailsView from './pages/DetailsView';
 import ImageUploader from "./pages/ImageUploader";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 // Define the config
 const config = {
@@ -28,26 +24,21 @@ const config = {
 export const theme = extendTheme({ config });
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
   return (
     <NativeBaseProvider>
-        <ImageUploader/>
+      {/*<NavigationContainer>
+        <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{
+            headerShown: false,
+        }}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="AddVehicle" component={AddVehicle} />
+          <Stack.Screen name="ShowVehicle" component={DetailsView} />
+        </Stack.Navigator>
+      </NavigationContainer>*/}
+      <DetailsView/>
     </NativeBaseProvider>
-  );
-}
-
-function ToggleDarkMode() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  return (
-    <HStack space={2} alignItems="center">
-      <Text>Dark</Text>
-      <Switch
-        isChecked={colorMode === "light"}
-        onToggle={toggleColorMode}
-        aria-label={
-          colorMode === "light" ? "switch to dark mode" : "switch to light mode"
-        }
-      />
-      <Text>Light</Text>
-    </HStack>
   );
 }
