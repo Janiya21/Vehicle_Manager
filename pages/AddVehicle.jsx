@@ -63,10 +63,13 @@ export default function AddVehicle() {
                         <Input variant="underlined" placeholder="Price" />
                     </Box>
                     <Box mt="3" w="80%">
-                        <Input variant="underlined" placeholder="Seller No" />
+                        <Input variant="underlined" placeholder="Mileage" />
                     </Box>
                     <Box mt="3" w="80%">
-                        <Input variant="underlined" placeholder="Mileage" />
+                        <Input variant="underlined" placeholder="Seller NIC" />
+                    </Box>
+                    <Box mt="3" w="80%">
+                        <Input variant="underlined" placeholder="Seller No" />
                     </Box>
                     <Box mt="3" w="80%">
                         <Button onPress={() => console.log("hello world")}>Register Vehicle</Button>
