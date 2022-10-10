@@ -5,15 +5,13 @@ import {
   VStack,
   Box,
 } from "native-base";
-import NativeBaseIcon from "./components/NativeBaseIcon";
-import { Platform } from "react-native";
+
 import AddVehicle from './pages/AddVehicle';
 import Login from './pages/Login';
 import DetailsView from './pages/DetailsView';
 import ImageUploader from "./pages/ImageUploader";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 
 // Define the config
 const config = {
@@ -27,18 +25,18 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NativeBaseProvider>
-      {/*<NavigationContainer>
+      <NavigationContainer>
         <Stack.Navigator
             initialRouteName="Login"
             screenOptions={{
             headerShown: false,
         }}>
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="AddVehicle" component={AddVehicle} />
           <Stack.Screen name="ShowVehicle" component={DetailsView} />
+          <Stack.Screen name="AddVehicle" component={AddVehicle} />
+          <Stack.Screen name="ImageUploader" component={ImageUploader} />
         </Stack.Navigator>
-      </NavigationContainer>*/}
-      <DetailsView/>
+      </NavigationContainer>
     </NativeBaseProvider>
   );
 }

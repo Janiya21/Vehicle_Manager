@@ -2,7 +2,9 @@ import { View, Platform, Image } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { NativeBaseProvider, Box, Input, Center, Button, AddIcon, ScrollView } from "native-base";
 import * as ImagePicker from 'expo-image-picker';
-import {Constants} from "expo-constants";
+import { FontAwesome5 } from '@expo/vector-icons';
+import axios from "axios";
+import {EvilIcons,MaterialIcons} from "@expo/vector-icons";
 
 export default function AddVehicle() {
     const [photo, setPhoto] = useState(null);
@@ -48,8 +50,7 @@ export default function AddVehicle() {
     };
 
     const handleUploadPhoto = () => {
-        fetch(`http://localhost:4000/api/images/upload`, {
-            method: 'POST',
+        axios.post(`http://192.168.1.24:4000/api/images/upload`, {
             body: createFormData(photo, { userId: '123' }),
             'Content-Type': 'multipart/form-data',
         })
@@ -64,16 +65,18 @@ export default function AddVehicle() {
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <MaterialIcons name="add-a-photo" size={100} color="black" />
             {photo && (
                 <>
                     <Image
                         source={{ uri: photo.uri }}
-                        style={{ width: 300, height: 300 }}
+                        style={{ width: 100, height: 100 }}
                     />
-                    <Button onPress={handleUploadPhoto}>Upload Photo</Button>
+                    {/*<FontAwesome5 name="car" size={100} color="black" />*/}
+                    <Button onPress={handleUploadPhoto}>Upload Photo </Button>
                 </>
             )}
-            <Button onPress={pickImage} >Choose Photo</Button>
+            <Button marginTop={5} onPress={pickImage} >Choose Photo</Button>
         </View>
     )
 }

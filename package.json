@@ -38,7 +38,8 @@
     "rn-nodeify": "^10.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "formik": "^2.2.9"
   },
   "bugs": {
     "url": "https://github.com/GeekyAnts/nativebase-templates/issues"
