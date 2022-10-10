@@ -161,12 +161,12 @@ export default function BuildingAFormExample(props) {
                 justifyContent: 'center'
             }}
         >
-               <Box flex={1} w="90%" h="100%" style={{marginTop:130}}>
-                   <EvilIcons name="user" size={120} color="white" style={{marginLeft:125}} />
+               <Box flex={1} w="90%" h="100%" style={{marginTop:130}} width={250}>
+                   <EvilIcons name="user" size={120} color="white" style={{marginLeft:70}} />
                    <Center top="2">
-                       <Heading color="white">LOG-IN</Heading>
+                       <Heading color="white">LOG - IN</Heading>
                    </Center>
-                   <FormControl isRequired mt="5">
+                   <FormControl isRequired mt="10">
                        <FormControl.Label _text={{
                            bold: true
                        }}>Name or Email</FormControl.Label>

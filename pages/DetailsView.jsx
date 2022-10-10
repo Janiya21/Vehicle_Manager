@@ -1,9 +1,11 @@
-import {View} from 'react-native'
+import {Image, View} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import {Box, Button, Center, ScrollView} from "native-base";
 import axios from "axios";
 import { Heading, Text, Input } from 'native-base';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, Entypo   } from '@expo/vector-icons';
+import { Fontisto, Ionicons  } from '@expo/vector-icons';
+import {VStack, Divider,NativeBaseProvider } from "native-base";
 
 export default function AddVehicle() {
 
@@ -23,29 +25,28 @@ export default function AddVehicle() {
                     setVehicles(res.data);
                     return resolve(res)
                 })
-                .finally(() => setIsLoading(false))
                 .catch((err) => {
                     return resolve(err)
                 })
+            setIsLoading(false);
         });
         return await promise;
     }
 
-    const allVehicles = () => {
+    const AllVehicles = () => {
         console.log(vehicles);
-        return vehicles.map((element) => {
+        return vehicles.map((element, i) => {
                 return (
-                    <Box style={{backgroundColor: "#004466", width: "85%", height: "25%"}} marginBottom={10} p={5} rounded="xl" _text={{
-                        fontSize: 'md',
-                        fontWeight: 'medium',
-                        color: 'white',
-                        textAlign: 'center'
-                    }}>
-                        <Heading size={"sm"} color={"white"}>  <FontAwesome5 name="car" size={20} color="white" />   {element.reg_No}   {element.type} </Heading>
-                        {/*<Text marginTop={5} size="sz" color={"white"} >{element.location}  |  {element.createdAt}  </Text>*/}
-                        {/*<Text marginTop={5} size="sz" color={"white"}>Seller NIC  : {element.seller_nic} </Text>*/}
-                        {/*<Text marginTop={5} size="sz" color={"white"}>Seller Tel  : {element.seller_no} </Text>*/}
-                        {/*<Text marginTop={5} size="sm" color={"white"} >Price  : {element.price} </Text>*/}
+                    <Box minHeight={"40"} key={i}>
+                        <Center mt="6" mb="4">
+                            <FontAwesome5 name="car" size={70} color="#e6f9ff" />
+                        </Center>
+                        <VStack flex="1" alignItems={"center"} mb={7}>
+                            <Heading size={"sm"} color={"#d9d9d9"} mt={"-2"}>  {element.reg_No}    |    {element.type} </Heading>
+                            <Text mt={"2"} color={"#d9d9d9"}> <Entypo name="location-pin" size={24} color="#ff9999" />  {element.location}    <Fontisto name="date" size={18} color="black" />   {element.date}    <Ionicons name="time" size={20} color="#f3ffcc" />  {element.time}  </Text>
+                            <Heading size={"sm"} color={"#d9d9d9"} mt={"4"}>  Seller :  {element.seller_nic}   |   {element.seller_no}</Heading>
+                        </VStack>
+                        <Divider my={4} />
                     </Box>
                 )
             }
@@ -53,39 +54,17 @@ export default function AddVehicle() {
     }
 
     return (
-        <View style={
-            {
-                backgroundColor: "#004466",
-                height:"100%"
-            }
-        } >
-
-            <ScrollView flex={"1"} style={
-                {
-                    backgroundColor: "#005580",
-                    minHeight: "94%",
-                    width: "90%",
-                    marginTop:"10%",
-                    marginLeft:"4%"
-                }
-            }>
-                <Box flex={"1"} top={10}>
-                    <Center flex={"3"} w={300} >
-                        <Box flex={"2"} w={200} h={300}>
-                            <Center>
-                                {isLoading ? 'Loading' : allVehicles()}
-                            </Center>;
-                        </Box>
-                    </Center>
-                </Box>
-            </ScrollView>
-            <Box mt={12} w="80%" style={{position:"absolute", marginLeft:"8%"}}>
+        <Center flex={1} px="3" backgroundColor={"rgba(7,37,83,0.81)"}>
+            <Box top={10} w="100%" style={{position:"relative"}}>
                 <Box alignItems="center">
                     <Input w="100%" py={0} InputRightElement={<Button size="ms" rounded="none" w="1/6" h={8}>
                         Search
                     </Button>} placeholder="Reg No" />
                 </Box>
             </Box>
-        </View>
+            <ScrollView w={["380", "300"]} h="80" mt="12" backgroundColor={"rgba(54,96,129,0.93)"}>
+                {isLoading ? 'Loading' : <AllVehicles/>}
+            </ScrollView>
+        </Center>
     )
 }
