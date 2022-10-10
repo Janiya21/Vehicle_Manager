@@ -61,12 +61,12 @@ export default function AddVehicle(props) {
             }}
         >
             <Button onPress={ () => {navigate2(props)}} style={{top:40, right:20, position:"absolute", backgroundColor:"#004466"}} >View All ></Button>
-            <Box flex={1} w="90%" h="100%" style={{marginTop:50}}>
-                <MaterialIcons name="add-a-photo" size={100} color="white" style={{marginLeft:125, marginTop:15}}/>
+            <Box flex={1} w="85%" h="100%" style={{marginTop:50}}>
+                <MaterialIcons name="add-a-photo" size={100} color="white" style={{marginLeft:115, marginTop:15}}/>
                 <Button style={{
                     width: 150,
                     fontWeight: "bold",
-                    marginLeft:110,
+                    marginLeft:100,
                     marginTop:20,
                 }}
                         onPress={() => {navigate(props)}}
@@ -125,9 +125,11 @@ export default function AddVehicle(props) {
                         size="sm"
                         placeholder="Seller Telephone" />
                 </FormControl>
-                <Button onPress={submitHandler} mt="8" colorScheme="cyan">
-                    Submit
-                </Button>
+                <Center>
+                    <Button width={80} onPress={submitHandler} mt="8" colorScheme="cyan">
+                        Register
+                    </Button>
+                </Center>
             </Box>
 
         </VStack>

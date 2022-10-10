@@ -95,6 +95,7 @@ import {VStack, Button, FormControl, Input, NativeBaseProvider, Center, Box, Hea
 import {EvilIcons} from "@expo/vector-icons";
 import axios from 'axios';
 import {TextInput} from "react-native";
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function BuildingAFormExample(props) {
     const [formData, setData] = React.useState({});
@@ -161,6 +162,7 @@ export default function BuildingAFormExample(props) {
                 justifyContent: 'center'
             }}
         >
+            <Button onPress={ () => {}} style={{top:40, right:20, position:"absolute", backgroundColor:"#004466"}} > Sign-In </Button>
                <Box flex={1} w="90%" h="100%" style={{marginTop:130}} width={250}>
                    <EvilIcons name="user" size={120} color="white" style={{marginLeft:70}} />
                    <Center top="2">
@@ -194,7 +196,7 @@ export default function BuildingAFormExample(props) {
                            placeholder="enter password" />
                    </FormControl>
                    <Button onPress={submitHandler} mt="8" colorScheme="cyan">
-                       Submit
+                       Log In
                    </Button>
                </Box>
 
